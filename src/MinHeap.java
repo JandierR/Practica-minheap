@@ -4,30 +4,30 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MinHeap {
-    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 
-    private ArrayList<Integer> heap;
+    private static ArrayList<Integer> heap = new ArrayList<>();
 
-    int getPadre(int i) {
+    static int getPadre(int i) {
         return (i - 1) / 2;
     }
 
-    int getHijoIzquierda(int i) {
+    static int getHijoIzquierda(int i) {
         return 2 * i + 1;
     }
 
-    int getHijoDerecha(int i) {
+    static int getHijoDerecha(int i) {
         return 2 * i + 2;
     }
 
-    public void swap(int i, int j) {
+    public static void swap(int i, int j) {
         int temp = heap.get(i);
         heap.set(i, heap.get(j));
         heap.set(j, temp);
     }
 
-    public void upHeapify(int i) {
+    public static void upHeapify(int i) {
 
         while (i > 0) {
             int padre = getPadre(i);
@@ -40,7 +40,7 @@ public class MinHeap {
         }
     }
 
-    public void downHeapify(int i) {
+    public static void downHeapify(int i) {
         while (true) {
 
             int hijoIzquierda = getHijoIzquierda(i);
@@ -62,15 +62,16 @@ public class MinHeap {
 
     }
 
-    public void insertar() throws IOException {
+    public static void insertar() throws IOException {
         System.out.print("Ingrese un valor: ");
         int valor = Integer.parseInt(in.readLine());
 
         heap.add(valor);
         upHeapify(heap.size() - 1);
+        System.out.println("Valor insertado exitosamente!");
     }
 
-    public int eliminarMin() {
+    public static int eliminarMin() {
         if (heap.isEmpty()) {
             System.out.println("El heap esta vacio.");
         }
@@ -81,15 +82,20 @@ public class MinHeap {
         heap.removeLast();
 
         downHeapify(0);
+        System.out.println("Valor eliminado exitosamente!");
 
         return min;
     }
 
-    public int peek() {
-        return heap.getFirst();
+    public static void peek() {
+        if (heap.isEmpty()) {
+            System.out.println("El heap esta vacio.");
+            return;
+        }
+        System.out.println("--> Minimo = " + heap.getFirst());
     }
 
-    public ArrayList<Integer> heapify(ArrayList<Integer> lista) {
+    public static ArrayList<Integer> heapify(ArrayList<Integer> lista) {
         heap = lista;
 
         int size = heap.size();
@@ -101,42 +107,7 @@ public class MinHeap {
         return lista;
     }
 
-    public void imprimirMenu() {
-        System.out.println("""
-                -1. Insertar
-                -2. Eliminar min
-                -3. Ver minimo
-                -4. Heapify
-                -0. Salir""");
+    public static void imprimirHeap() {
+        System.out.println(heap.toString());
     }
-
-    public int leerOpcion() throws IOException {
-        return Integer.parseInt(in.readLine());
-    }
-
-    public void procesarOpcion(int opcion) throws IOException {
-        switch (opcion) {
-            case 1 -> insertar();
-            case 2 -> eliminarMin();
-            case 3 -> peek();
-            case 4 -> {
-
-                //Revisar si esto funciona correctamente
-                //Decidir si hacer todo esto del menu en una clase Main o no.
-                System.out.print("Ingrese la cantidad de elementos a ingresar: ");
-                int cantidad = Integer.parseInt(in.readLine());
-                ArrayList<Integer> lista = new ArrayList<>();
-
-                for (int i = 0; i < cantidad; i++) {
-                    System.out.print("Ingrese el valor del elemento #" + (i + 1) + ": ");
-                    lista.add(Integer.parseInt(in.readLine()));
-                }
-                System.out.println("Heap construido");
-
-                //Revisar si imprime bien la lista
-                System.out.println(heapify(lista).toString());
-            }
-        };
-    }
-
 }

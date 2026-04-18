@@ -5,18 +5,21 @@ import java.util.ArrayList;
 
 public class Main {
 
-    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int opcion;
 
-        do {
 
+        do {
+        imprimirMenu();
+            opcion = leerOpcion();
+            procesarOpcion(opcion);
         } while (opcion != 0);
     }
 
-    public void imprimirMenu() {
+    public static void imprimirMenu() {
+        System.out.println();
         System.out.println("""
                 -1. Insertar
                 -2. Eliminar min
@@ -25,19 +28,17 @@ public class Main {
                 -0. Salir""");
     }
 
-    public int leerOpcion() throws IOException {
+    public static int leerOpcion() throws IOException {
         return Integer.parseInt(in.readLine());
     }
 
-    public void procesarOpcion(int opcion) throws IOException {
+    public static void procesarOpcion(int opcion) throws IOException {
         switch (opcion) {
-            case 1 -> insertar();
-            case 2 -> eliminarMin();
-            case 3 -> peek();
+            case 1 -> MinHeap.insertar();
+            case 2 -> MinHeap.eliminarMin();
+            case 3 -> MinHeap.peek();
             case 4 -> {
 
-                //Revisar si esto funciona correctamente
-                //Decidir si hacer todo esto del menu en una clase Main o no.
                 System.out.print("Ingrese la cantidad de elementos a ingresar: ");
                 int cantidad = Integer.parseInt(in.readLine());
                 ArrayList<Integer> lista = new ArrayList<>();
@@ -48,9 +49,9 @@ public class Main {
                 }
                 System.out.println("Heap construido");
 
-                //Revisar si imprime bien la lista
-                System.out.println(heapify(lista).toString());
+                System.out.println(MinHeap.heapify(lista));
             }
+            case 5 -> MinHeap.imprimirHeap();
         }
 
     }
