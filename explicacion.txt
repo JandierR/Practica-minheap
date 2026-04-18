@@ -1,0 +1,14 @@
+Un MinHeap, como el implementado en este codigo, es una forma de organizada de guardar datos donde siempre el valor mas pequeno
+está en la parte superior.
+
+Este comportamiento permite acceder rapidamente a los elementos pequeños, donde en un contexto
+de aplicacion puede ser elementos de prioridad en valores pequeños.
+
+En este proyecto, el minheap se implementa utilizando una lista, donde cada posicion tiene relacion con su padre y sus hijos.
+Cuando se insertar un valor o se elimina el minimo, toda la estructura se reorganiza de nuevo, generando el siguiente elemento
+como el nuevo minimo, para mantener orden. 
+
+Este algoritmo se utilizan en contextos reales como el encontrar la ruta más corta entre puntos.
+
+Por tanto, los monticulos sirven para ordenar información y para resolver problematicas donde se necesita
+tomar decisiones rapidas basadas en valores pequeños, como en rutas, prioridades, o planificacion de tares.
